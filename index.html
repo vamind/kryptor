@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha384-YkYpnhy3j3+zc3fQvzlbh4WGwDgt+06gsGsaApwM1O3IKIsKJk61C0Lr6YvbovUV" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script>
+        $(document).ready(function() {
+            $('#decrypt-js').on('click', function() {
+                var message = $('#message-js').val();
+                var passphrase = $('#decoding-passphrase-js').val();
+                var secret = CryptoJS.AES.decrypt(message, passphrase);
+                $('#new-message-js').val(secret.toString(CryptoJS.enc.Utf8));
+            });
+
+            $('#encrypt-js').on('click', function() {
+                var message = $('#secret-js').val();
+                var passphrase = $('#encoding-passphrase-js').val();
+                var secret = CryptoJS.AES.encrypt(message, passphrase);
+                $('#new-secret-js').val(secret);
+            });
+
+            $('#cleaner-js').on('click', function() {
+                $('#message-js').val('');
+                $('#decoding-passphrase-js').val('');
+                $('#new-message-js').val('')
+                $('#secret-js').val('');
+                $('#encoding-passphrase-js').val('');
+                $('#new-secret-js').val('');
+            });
+        });
+    </script>
+    <title>Kryptor</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                <textarea id="message-js" class="form-control mt-5" placeholder="Message" rows="10"></textarea>
+            </div>
+            <div class="col-sm-6">
+                <textarea id="secret-js" class="form-control mt-5" placeholder="Secret" rows="10"></textarea>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                <textarea id="decoding-passphrase-js" class="form-control mt-5" placeholder="Passphrase for decoding" rows="1"></textarea>
+            </div>
+            <div class="col-sm-6">
+                <textarea id="encoding-passphrase-js" class="form-control mt-5" placeholder="Passphrase for encoding" rows="1"></textarea>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                <textarea id="new-message-js" class="form-control mt-5" rows="10"></textarea>
+            </div>
+            <div class="col-sm-6">
+                <textarea id="new-secret-js" class="form-control mt-5" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <button id="decrypt-js" class="btn btn-success mt-5 mx-auto">DECRYPT</button>
+            </div>
+            <div class="col-sm-6 text-center">
+                <button id="encrypt-js" class="btn btn-danger mt-5 mx-auto">ENCRYPT</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <button id="cleaner-js" class="btn btn-primary mt-5 mx-auto">clean</button>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
